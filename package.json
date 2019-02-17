@@ -1,0 +1,118 @@
+{
+  "name": "trl-events-cache",
+  "version": "0.1.0",
+  "description": "A server who listen events from TRL smart contracts",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "Abdalah-Hossayn Mokhtar Bacha <mokhtar.bacha@consensys.net>",
+  "license": "AGPL-3.0",
+  "scripts": {
+    "start": "npm run serve",
+    "build": "npm run build-ts && npm run tslint",
+    "serve": "node dist/src/server.js",
+    "semantic-release": "semantic-release",
+    "watch-node": "nodemon dist/src/server.js",
+    "watch": "nodemon -e ts -x ts-node src/server.ts",
+    "test": "nyc mocha -r ts-node/register tests/**/*.spec.ts --exit && cp ./coverage/coverage-final.json ./coverage/coverage.json",
+    "watch-test": "npm run test -- --watchAll",
+    "commit": "npx git-cz",
+    "build-ts": "tsc",
+    "tslint": "tslint -c tslint.json -p tsconfig.json",
+    "debug": "npm run build && npm run watch-debug",
+    "serve-debug": "nodemon --inspect dist/server.js"
+  },
+  "nyc": {
+    "include": [
+      "src/**/*.ts",
+      "src/**/*.tsx"
+    ],
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "reporter": [
+      "text-summary",
+      "json"
+    ],
+    "sourceMap": true,
+    "instrument": true
+  },
+  "dependencies": {
+    "@frontier-token-research/frontier-js": "1.6.0",
+    "@frontier-token-research/trl-contracts-poc": "^2.3.0",
+    "@types/bluebird": "^3.5.20",
+    "@types/lodash": "^4.14.109",
+    "@types/pino": "^4.7.1",
+    "@types/socket.io": "^1.4.33",
+    "amqplib": "^0.5.2",
+    "bcrypt-nodejs": "^0.0.3",
+    "body-parser": "^1.18.2",
+    "compression": "^1.7.1",
+    "dotenv": "^4.0.0",
+    "errorhandler": "^1.5.0",
+    "express": "^4.16.2",
+    "express-graphql": "^0.6.12",
+    "graphql": "^0.13.2",
+    "graphql-import": "^0.6.0",
+    "graphql-tools": "^3.0.2",
+    "lodash": "^4.17.10",
+    "mongodb": "2.2.33",
+    "pino": "^4.16.1",
+    "semantic-release": "^15.5.1",
+    "socket.io": "^2.1.1",
+    "web3": "^1.0.0-beta.33",
+    "yargs": "^11.0.0"
+  },
+  "devDependencies": {
+    "@types/async": "^2.0.45",
+    "@types/body-parser": "^1.16.8",
+    "@types/chai": "^4.1.4",
+    "@types/compression": "^0.0.35",
+    "@types/dotenv": "^4.0.2",
+    "@types/errorhandler": "^0.0.32",
+    "@types/express-graphql": "^0.6.1",
+    "@types/graphql": "^0.13.1",
+    "@types/lusca": "^1.5.0",
+    "@types/mocha": "^5.2.5",
+    "@types/mongodb": "^3.0.18",
+    "@types/morgan": "^1.7.35",
+    "@types/node": "^9.4.6",
+    "@types/request": "^2.47.0",
+    "@types/shelljs": "^0.7.8",
+    "@types/supertest": "^2.0.4",
+    "@types/winston": "^2.3.7",
+    "chai": "^4.1.2",
+    "codecov": "^3.0.4",
+    "concurrently": "^3.5.1",
+    "cz-conventional-changelog": "^2.1.0",
+    "jest": "^22.0.4",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.13.0",
+    "nyc": "^12.0.2",
+    "semantic-release-docker": "^2.1.0",
+    "shelljs": "^0.8.1",
+    "supertest": "^3.0.0",
+    "ts-jest": "^22.0.4",
+    "ts-node": "^5.0.1",
+    "tslint": "^5.9.1",
+    "typescript": "^2.7.2",
+    "ws": "^6.0.0"
+  },
+  "release": {
+    "verifyConditions": "semantic-release-docker",
+    "publish": {
+      "path": "semantic-release-docker",
+      "name": "frontiertokenresearch/trl-cache"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
